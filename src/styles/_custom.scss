@@ -1,0 +1,27 @@
+$primary: #f65261;
+$secondary: #424242;
+$dark: #232323;
+$grey: #555555;
+$form-text-color: #ffffff;
+$bs-btn-color: #ffffff;
+
+.btn-content {
+  color: var(--bs-white);
+  text-transform: uppercase;
+}
+
+.btn {
+  color: var(--bs-white);
+}
+
+.form-control {
+  background-color: var(--bs-dark);
+}
+
+#app {
+  text-transform: uppercase;
+}
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+//@import 'node_modules/bootstrap/dist/css/bootstrap.css';
+//@import 'node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.css';
