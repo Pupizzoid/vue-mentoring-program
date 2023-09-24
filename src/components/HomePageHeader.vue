@@ -25,6 +25,7 @@ const searchHandler = (value: string) => {
 </template>
 
 <style scoped lang="scss">
+@import './../styles/const';
 .header-wrapper {
   min-height: 400px;
   background-image: url('../assets/movie-collage.webp');
@@ -39,7 +40,7 @@ const searchHandler = (value: string) => {
     text-transform: uppercase;
     font-size: 40px;
     letter-spacing: 3px;
-    color: var(--bs-white);
+    color: $white;
     font-weight: 200;
     margin-bottom: 20px;
   }

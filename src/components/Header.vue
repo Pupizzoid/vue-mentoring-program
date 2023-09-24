@@ -5,8 +5,9 @@
 </template>
 
 <style scoped lang="scss">
+@import './../styles/const';
 .logo {
-  color: var(--bs-primary);
+  color: $primary;
   font-size: 24px;
   padding: 20px 40px;
   margin: 0;

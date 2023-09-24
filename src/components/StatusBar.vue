@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import ToggleButtonGroup from './ToggleButtonGroup.vue';
-const props = defineProps<{
+defineProps<{
   label: string;
   count: number;
 }>();
-
-const { label, count } = props;
 
 const optionsData = ['release date', 'rating'];
 
@@ -28,15 +26,12 @@ const sortHandler = (value: string) => {
 </template>
 
 <style scoped lang="scss">
+@import './../styles/const';
 .status-bar {
   padding: 15px 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--bs-secondary);
-
-  span {
-    color: var(--bs-white);
-  }
+  background-color: $secondary;
 }
 </style>

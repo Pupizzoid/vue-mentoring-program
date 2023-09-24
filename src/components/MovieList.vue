@@ -2,23 +2,25 @@
 import MovieCard from './MovieCard.vue';
 import { Movie } from '../interfaces/Movie.ts';
 
-const props = defineProps<{
+defineProps<{
   movies: Movie[];
 }>();
 </script>
 
 <template>
   <div class="movies-list">
-    <MovieCard v-for="movie in props.movies" :card-data="movie" />
+    <MovieCard v-for="movie in movies" :card-data="movie" :key="movie.id" />
   </div>
 </template>
 
 <style scoped lang="scss">
 .movies-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  background-color: var(--bs-dark);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
   padding: 40px;
+  justify-content: center;
+  max-width: 1280px;
+  margin: auto;
 }
 </style>

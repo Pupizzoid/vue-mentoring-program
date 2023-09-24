@@ -1,8 +1,14 @@
 import { createApp } from 'vue';
 import './style.css';
-import BootstrapVue3 from 'bootstrap-vue-3';
 import App from './App.vue';
+import { httpClient } from './global/httpClient.ts';
 
 const app = createApp(App);
-app.use(BootstrapVue3);
+
+app.directive('lazyload', {
+  beforeMount(el) {
+    el.setAttribute('loading', 'lazy');
+  },
+});
+app.provide('http', httpClient);
 app.mount('#app');

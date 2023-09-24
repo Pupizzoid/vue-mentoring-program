@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/vue3';
 import '../src/styles/_custom.scss';
+import '../src/style.css';
 import { themes } from '@storybook/theming';
 
 export const parameters = {

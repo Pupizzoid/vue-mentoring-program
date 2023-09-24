@@ -20,7 +20,7 @@ const clickHandler = () => {
   <div class="toggle-group">
     <p class="toggle-group-title">{{ label }}</p>
     <div class="toggle-wrapper">
-      <label v-for="option in options" class="label" :for="option" :class="{ active: option === String(picked) }">
+      <label v-for="option in options" class="label" :for="option" :key="option" :class="{ active: option === String(picked) }">
         {{ option }}
         <input type="radio" v-model="picked" :value="option" class="btn-check" :id="option" autocomplete="off" @change="clickHandler()" />
       </label>
@@ -28,9 +28,10 @@ const clickHandler = () => {
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import './../styles/const';
 .toggle-group {
-  color: var(--bs-white);
+  color: $white;
   display: flex;
   align-items: center;
 
@@ -47,11 +48,14 @@ const clickHandler = () => {
   .label {
     display: block;
     padding: 8px 16px;
-    background-color: var(--bs-secondary);
+    background-color: $secondary;
+    input {
+      display: none;
+    }
   }
 
   .active {
-    background-color: var(--bs-primary);
+    background-color: $primary;
   }
 }
 </style>
