@@ -4,9 +4,12 @@ import StatusBar from '../components/StatusBar.vue';
 import HomePageHeader from '../components/HomePageHeader.vue';
 import MovieList from '../components/MovieList.vue';
 import Footer from '../components/Footer.vue';
-import { useMovies } from '../composables/movies.ts';
 import Spinner from '../components/Spinner.vue';
 import { reactive } from 'vue';
+import useMoviesStore from '../store/movies.ts';
+import { storeToRefs } from 'pinia';
+import useSortStore from '../store/sort.ts';
+import MoviePage from './MoviePage.vue';
 
 const context = reactive({ searchBy: 'title', sortBy: 'release date' });
 const searchData = (event: string) => {
@@ -16,11 +19,10 @@ const searchData = (event: string) => {
 const sortData = (event: string) => {
   context.sortBy = event;
 };
-
-const { state, getMovies } = useMovies();
+const { loading, selectedMovie } = storeToRefs(useMoviesStore());
+const { getMovies } = useMoviesStore();
 getMovies();
-
-const { movies, loading, error } = state;
+const { getSortedMovies } = storeToRefs(useSortStore());
 </script>
 
 <template>
@@ -30,9 +32,10 @@ const { movies, loading, error } = state;
     </template>
 
     <template v-slot:main>
-      <StatusBar :count="movies.length" label="movie found" @sort="sortData($event)" />
+      <StatusBar :count="getSortedMovies.length" label="movie found" @sort="sortData($event)" />
       <Spinner v-if="loading" />
-      <MovieList :movies="movies" />
+      <MoviePage v-else-if="selectedMovie" />
+      <MovieList v-else :movies="getSortedMovies" />
     </template>
 
     <template v-slot:footer>

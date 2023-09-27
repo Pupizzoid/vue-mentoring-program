@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import Button from './Button.vue';
-
-const searchValue = '';
-const emit = defineEmits<{
-  (e: 'searchData', value: string): void;
-}>();
-
-const searchHandler = () => {
-  emit('searchData', searchValue);
-};
+import useSearchStore from '../store/search.ts';
+const state = useSearchStore();
 </script>
 
 <template>
   <div class="search">
-    <input v-model="searchValue" class="input" @keyup.enter="searchHandler()" />
+    <input v-model="state.searchString" class="input" />
     <Button size="extra-large" text="Search" />
   </div>
 </template>

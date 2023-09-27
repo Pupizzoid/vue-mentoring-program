@@ -5,6 +5,14 @@ const meta = {
   title: 'UI/ToogleButtonGroup',
   component: ToggleButtonGroup,
   tags: ['autodocs'],
+  argTypes: {
+    options: {
+      control: { type: 'object' },
+    },
+    label: {
+      control: { type: 'text' },
+    },
+  },
   render: (args: any) => ({
     components: { ToggleButtonGroup },
     setup() {

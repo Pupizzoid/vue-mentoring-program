@@ -2,14 +2,15 @@
 import PageHeader from './Header.vue';
 import Search from './Search.vue';
 import ToggleButtonGroup from './ToggleButtonGroup.vue';
+import useSearchStore from '../store/search.ts';
+import { ToggleGroupMap } from '../utils/ToggleGroupMap.ts';
 
 const optionsData = ['title', 'genre'];
-const emit = defineEmits<{
-  (e: 'search', value: string): void;
-}>();
+
+const state = useSearchStore();
 
 const searchHandler = (value: string) => {
-  emit('search', value);
+  state.setSearchBy(ToggleGroupMap.get(value) as string);
 };
 </script>
 
@@ -18,7 +19,7 @@ const searchHandler = (value: string) => {
     <PageHeader />
     <div class="search-wrapper">
       <h1 class="header">Find your movie</h1>
-      <Search @search-data="searchHandler($event)" />
+      <Search />
       <ToggleButtonGroup :options="optionsData" label="search by" @input="searchHandler($event)" />
     </div>
   </div>

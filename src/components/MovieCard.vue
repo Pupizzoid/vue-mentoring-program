@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Movie } from '../interfaces/Movie.ts';
 import { ref } from 'vue';
+import useMoviesStore from '../store/movies.ts';
 
 const props = defineProps<{
   cardData: Movie;
@@ -9,21 +10,14 @@ const props = defineProps<{
 const { title, genres, posterurl, id, year } = props.cardData;
 const genresValue = genres.join(' & ');
 const image = ref(posterurl);
-
-const emit = defineEmits<{
-  (e: 'cardClick', id: number): void;
-}>();
 const handleImageError = () => {
   image.value = '/src/assets/error-image.jpg';
 };
-
-const clickHandler = () => {
-  emit('cardClick', id);
-};
+const { selectMovie } = useMoviesStore();
 </script>
 
 <template>
-  <div class="card-wrapper" @click="clickHandler()">
+  <div class="card-wrapper" @click="selectMovie(id)">
     <img class="card-image" :src="image" @error="handleImageError" v-lazyload />
     <div class="info-wrapper">
       <span class="card-info title">{{ title }}</span>
@@ -39,6 +33,7 @@ const clickHandler = () => {
   text-transform: none;
   height: 100%;
   width: 350px;
+  position: relative;
 
   .card-image {
     max-width: 100%;
