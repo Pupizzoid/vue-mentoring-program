@@ -14,8 +14,11 @@ export default {
   ],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(js|ts)$',
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
   coveragePathIgnorePatterns: ['/node_modules/', '/tests/'],
-  coverageReporters: ['text', 'json-summary'],
+  coverageReporters: ['clover', 'json', 'lcov', ['text', { skipFull: true }]],
   testEnvironmentOptions: {
     customExportConditions: ['node', 'node-addons'],
   },
