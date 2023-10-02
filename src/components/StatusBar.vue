@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import ToggleButtonGroup from './ToggleButtonGroup.vue';
+import useSortStore from '../store/sort.ts';
+import { ToggleGroupMap } from '../utils/ToggleGroupMap.ts';
 defineProps<{
   label: string;
   count: number;
@@ -7,12 +9,10 @@ defineProps<{
 
 const optionsData = ['release date', 'rating'];
 
-const emit = defineEmits<{
-  (e: 'sort', value: string): void;
-}>();
+const state = useSortStore();
 
 const sortHandler = (value: string) => {
-  emit('sort', value);
+  state.sortBy = ToggleGroupMap.get(value) as string;
 };
 </script>
 
