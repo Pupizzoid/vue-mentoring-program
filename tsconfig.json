@@ -5,6 +5,11 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -13,6 +18,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
+    "types": [
+      "vite/client",
+      "jest",
+      "jsdom",
+      "node"
+    ],
 
     /* Linting */
     "strict": true,

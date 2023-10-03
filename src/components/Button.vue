@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ButtonSize } from '../types/ButtonSize.ts';
 
-const props = defineProps<{
+defineProps<{
   size: ButtonSize;
   text: string;
 }>();
