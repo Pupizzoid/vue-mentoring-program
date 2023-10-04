@@ -1,23 +1,21 @@
 <script setup lang="ts">
 import { Movie } from '../interfaces/Movie.ts';
 import { ref } from 'vue';
-import useMoviesStore from '../store/movies.ts';
 
 const props = defineProps<{
   cardData: Movie;
 }>();
 
-const { title, genres, posterurl, id, year } = props.cardData;
+const { title, genres, posterurl, year } = props.cardData;
 const genresValue = genres.join(' & ');
 const image = ref(posterurl);
 const handleImageError = () => {
   image.value = '/src/assets/error-image.jpg';
 };
-const { selectMovie } = useMoviesStore();
 </script>
 
 <template>
-  <div class="card-wrapper" @click="selectMovie(id)">
+  <div class="card-wrapper">
     <img class="card-image" :src="image" @error="handleImageError" v-lazyload />
     <div class="info-wrapper">
       <span class="card-info title">{{ title }}</span>

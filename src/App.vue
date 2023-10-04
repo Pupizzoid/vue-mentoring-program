@@ -3,7 +3,7 @@ import HomePage from './pages/HomePage.vue';
 </script>
 
 <template>
-  <HomePage />
+  <router-view></router-view>
 </template>
 
 <style lang="scss">

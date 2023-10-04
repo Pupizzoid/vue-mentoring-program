@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import Button from './Button.vue';
 import useSearchStore from '../store/search.ts';
+import { ref } from 'vue';
+import useMoviesStore from '@/store/movies.ts';
 const state = useSearchStore();
+const { getMovies } = useMoviesStore();
+const searchString = ref('');
+const handleSearch = () => {
+  state.searchString = searchString.value;
+  getMovies();
+};
 </script>
 
 <template>
   <div class="search">
-    <input v-model="state.searchString" class="input" />
-    <Button size="extra-large" text="Search" />
+    <input v-model="searchString" class="input" @keyup.enter="handleSearch()" />
+    <Button size="extra-large" text="Search" @click="handleSearch()" />
   </div>
 </template>
 

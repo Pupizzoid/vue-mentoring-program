@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div class="template">
     <header>
       <slot name="header"></slot>
     </header>
@@ -16,4 +16,12 @@
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.template {
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+</style>

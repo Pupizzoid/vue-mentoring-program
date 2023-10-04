@@ -2,6 +2,7 @@
 import ToggleButtonGroup from './ToggleButtonGroup.vue';
 import useSortStore from '../store/sort.ts';
 import { ToggleGroupMap } from '../utils/ToggleGroupMap.ts';
+import useMoviesStore from '@/store/movies.ts';
 defineProps<{
   label: string;
   count: number;
@@ -10,9 +11,11 @@ defineProps<{
 const optionsData = ['release date', 'rating'];
 
 const state = useSortStore();
+const { getMovies } = useMoviesStore();
 
 const sortHandler = (value: string) => {
   state.sortBy = ToggleGroupMap.get(value) as string;
+  getMovies();
 };
 </script>
 

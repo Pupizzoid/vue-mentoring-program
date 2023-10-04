@@ -9,7 +9,6 @@ import { reactive } from 'vue';
 import useMoviesStore from '../store/movies.ts';
 import { storeToRefs } from 'pinia';
 import useSortStore from '../store/sort.ts';
-import MoviePage from './MoviePage.vue';
 
 const context = reactive({ searchBy: 'title', sortBy: 'release date' });
 const searchData = (event: string) => {
@@ -19,7 +18,7 @@ const searchData = (event: string) => {
 const sortData = (event: string) => {
   context.sortBy = event;
 };
-const { loading, selectedMovie } = storeToRefs(useMoviesStore());
+const { loading } = storeToRefs(useMoviesStore());
 const { getMovies } = useMoviesStore();
 getMovies();
 const { getSortedMovies } = storeToRefs(useSortStore());
@@ -34,7 +33,6 @@ const { getSortedMovies } = storeToRefs(useSortStore());
     <template v-slot:main>
       <StatusBar :count="getSortedMovies.length" label="movie found" @sort="sortData($event)" />
       <Spinner v-if="loading" />
-      <MoviePage v-else-if="selectedMovie" />
       <MovieList v-else :movies="getSortedMovies" />
     </template>
 

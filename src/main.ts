@@ -3,6 +3,7 @@ import './style.css';
 import App from './App.vue';
 import { httpClient } from './global/httpClient.ts';
 import { createPinia } from 'pinia';
+import router from '@/router';
 
 const pinia = createPinia();
 
@@ -14,5 +15,6 @@ app.directive('lazyload', {
   },
 });
 app.use(pinia);
+app.use(router);
 app.provide('http', httpClient);
 app.mount('#app');
