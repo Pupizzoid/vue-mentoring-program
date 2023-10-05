@@ -1,16 +1,8 @@
 import { mount } from '@vue/test-utils';
-// @ts-ignore
 import Header from '../src/components/Header.vue';
-import { createTestingPinia } from '@pinia/testing';
-import useMoviesStore from '../src/store/movies';
-import { createPinia, setActivePinia } from 'pinia';
+import { createRouter, createWebHistory } from 'vue-router';
 
 describe('Header', () => {
-  beforeEach(() => {
-    const pinia = createPinia();
-    setActivePinia(pinia);
-  });
-
   it('renders properly', () => {
     const wrapper = mount(Header);
 
@@ -18,16 +10,23 @@ describe('Header', () => {
     expect(wrapper.text()).toContain('roulette');
   });
 
-  it('renders properly', () => {
-    const wrapper = mount(Header, {
+  it('renders properly', async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [{ path: '/', redirect: '/mock-redirect' }],
+    });
+
+    const app = mount(Header, {
       global: {
-        plugins: [createTestingPinia()],
+        plugins: [router],
       },
     });
 
-    const store = useMoviesStore();
-    wrapper.find('p').trigger('click');
+    await router.isReady();
 
-    expect(store.resetSelectedMovie).toHaveBeenCalled();
+    await app.find('.logo').trigger('click');
+    await router.isReady();
+
+    expect(router.currentRoute.value.path).toBe('/mock-redirect');
   });
 });

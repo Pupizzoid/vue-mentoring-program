@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-// @ts-ignore
 import Footer from '../src/components/Footer.vue';
 
 describe('Footer', () => {

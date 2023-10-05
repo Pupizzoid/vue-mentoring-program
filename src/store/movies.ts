@@ -21,7 +21,8 @@ const useMoviesStore = defineStore('movies', {
         .finally(() => (this.loading = false));
     },
 
-    getMovie(id: string) {
+    async getMovie(id: string) {
+      this.loading = true;
       return httpClient
         .get(`https://tame-erin-pike-toga.cyclic.app/movies/${id}`)
         .then((res: Movie) => (this.selectedMovie = res))

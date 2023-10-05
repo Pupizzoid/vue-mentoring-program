@@ -5,6 +5,10 @@ import NotFound from '@/pages/NotFound.vue';
 const routes: VueRouter.RouteRecordRaw[] = [
   {
     path: '/',
+    redirect: '/movies',
+  },
+  {
+    path: '/movies',
     name: 'home',
     component: HomePage,
   },

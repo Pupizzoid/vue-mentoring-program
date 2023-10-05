@@ -1,5 +1,4 @@
 import { mount, VueWrapper } from '@vue/test-utils';
-// @ts-ignore
 import ToggleButtonGroup from '../src/components/ToggleButtonGroup.vue';
 
 describe('ToggleGroup', () => {

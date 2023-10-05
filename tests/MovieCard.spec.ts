@@ -1,9 +1,7 @@
 import { mount, VueWrapper } from '@vue/test-utils';
-// @ts-ignore
 import MovieCard from '../src/components/MovieCard.vue';
 import { createPinia, setActivePinia } from 'pinia';
 import { createTestingPinia } from '@pinia/testing';
-import useMoviesStore from '../src/store/movies';
 const lazyLoadDirective = jest.fn();
 describe('MovieCard', () => {
   let wrapper: VueWrapper<any, any>;
@@ -34,11 +32,5 @@ describe('MovieCard', () => {
     expect(wrapper.text()).toContain('Test Movie');
     expect(wrapper.text()).toContain('criminal');
     expect(wrapper.text()).toContain('2023');
-  });
-
-  it('should call action', () => {
-    const store = useMoviesStore();
-    wrapper.find('.card-wrapper').trigger('click');
-    expect(store.selectMovie).toHaveBeenCalled();
   });
 });

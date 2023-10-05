@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-// @ts-ignore
 import Button from '@/components/Button.vue';
 
 const props = { text: 'Hello Vitest', size: 'small' };
