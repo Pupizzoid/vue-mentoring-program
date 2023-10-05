@@ -1,30 +1,43 @@
 import { defineStore } from 'pinia';
-import moviesApi from './../api/movies.ts';
 import { Movie } from '../interfaces/Movie.ts';
+import { httpClient } from '@/global/httpClient.ts';
+import useSearchStore from '@/store/search.ts';
+import useSortStore from '@/store/sort.ts';
 
 const useMoviesStore = defineStore('movies', {
   state: () => ({
-    movies: [],
+    movies: [] as Movie[],
     loading: false,
     error: null,
-    selectedMovie: null,
+    selectedMovie: {} as Movie,
   }),
   actions: {
     async getMovies() {
       this.loading = true;
-      return moviesApi
-        .getMovies()
-        .then(res => (this.movies = res))
-        .catch(error => (this.error = error))
+      return httpClient
+        .get(`https://tame-erin-pike-toga.cyclic.app/movies${this.getRequestUrlParams()}`)
+        .then((res: Movie[]) => (this.movies = res))
+        .catch((error: null) => (this.error = error))
         .finally(() => (this.loading = false));
     },
 
-    selectMovie(id: number) {
-      this.selectedMovie = this.movies.find((movie: Movie) => movie.id === id) || null;
+    async getMovie(id: string) {
+      this.loading = true;
+      return httpClient
+        .get(`https://tame-erin-pike-toga.cyclic.app/movies/${id}`)
+        .then((res: Movie) => (this.selectedMovie = res))
+        .catch((error: null) => (this.error = error))
+        .finally(() => (this.loading = false));
     },
 
-    resetSelectedMovie() {
-      this.selectedMovie = null;
+    getRequestUrlParams() {
+      const { searchBy, searchString } = useSearchStore();
+      const { sortBy } = useSortStore();
+      let params = `?_sort${sortBy}&_order=acs`;
+      if (searchString) {
+        params = params + `&${searchBy}_like=${searchString}`;
+      }
+      return params;
     },
   },
 });

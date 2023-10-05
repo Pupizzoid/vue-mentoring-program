@@ -1,11 +1,9 @@
 import { mount, VueWrapper } from '@vue/test-utils';
-// @ts-ignore
 import Search from '../src/components/Search.vue';
 import { createPinia, setActivePinia } from 'pinia';
 import { createTestingPinia } from '@pinia/testing';
-// @ts-ignore
 import Button from '../src/components/Button.vue';
-import useSearchStore from '../src/store/search';
+
 describe('Search', () => {
   let wrapper: VueWrapper<any, any>;
 
@@ -28,7 +26,16 @@ describe('Search', () => {
   it('should change value', async () => {
     const textInput = wrapper.find('.input');
     await textInput.setValue('some value');
-    const store = useSearchStore();
-    expect(store.searchString).toEqual('some value');
+    expect(wrapper.vm.searchString).toEqual('some value');
+  });
+
+  it('calls handleSearch when Enter key is pressed in the input', async () => {
+    const input = wrapper.find('.input');
+    const handleSearch = jest.spyOn(wrapper.vm, 'handleSearch');
+
+    await input.setValue('Test Search');
+    await input.trigger('keyup.enter');
+
+    expect(handleSearch).toHaveBeenCalled();
   });
 });

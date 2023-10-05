@@ -1,6 +1,4 @@
-// @ts-ignore
 import Spinner from '../src/components/Spinner.vue';
-
 import { mount } from '@vue/test-utils';
 
 describe('Spinner', () => {

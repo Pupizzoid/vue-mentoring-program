@@ -1,9 +1,7 @@
 import { mount } from '@vue/test-utils';
-// @ts-ignore
 import MovieList from '../src/components/MovieList.vue';
 import { createPinia, setActivePinia } from 'pinia';
 import { MOVIES } from '../src/mockData/mockMovies';
-// @ts-ignore
 import MovieCard from '../src/components/MovieCard.vue';
 
 describe('MovieList', () => {

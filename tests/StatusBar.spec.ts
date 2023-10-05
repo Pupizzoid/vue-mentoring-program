@@ -1,9 +1,6 @@
 import { mount, VueWrapper } from '@vue/test-utils';
-// @ts-ignore
 import StatusBar from '../src/components/StatusBar.vue';
-
 import { createPinia, setActivePinia } from 'pinia';
-// @ts-ignore
 import ToggleButtonGroup from '../src/components/ToggleButtonGroup.vue';
 import { createTestingPinia } from '@pinia/testing';
 

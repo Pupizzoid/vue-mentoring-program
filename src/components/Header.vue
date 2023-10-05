@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import useMoviesStore from '../store/movies.ts';
+import router from '@/router';
 
-const { resetSelectedMovie } = useMoviesStore();
+const navigateHandler = () => {
+  router.push('/');
+};
 </script>
 
 <template>
-  <p class="logo" @click="resetSelectedMovie()"><b>netflix</b>roulette</p>
+  <p class="logo" @click="navigateHandler()"><b>netflix</b>roulette</p>
 </template>
 
 <style scoped lang="scss">
