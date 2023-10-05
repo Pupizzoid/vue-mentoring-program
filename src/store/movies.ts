@@ -33,7 +33,7 @@ const useMoviesStore = defineStore('movies', {
     getRequestUrlParams() {
       const { searchBy, searchString } = useSearchStore();
       const { sortBy } = useSortStore();
-      let params = `?_sort=${sortBy}&_order=acs`;
+      let params = `?_sort=${sortBy}&_order=desc`;
       if (searchString) {
         params = params + `&${searchBy}_like=${searchString}`;
       }
